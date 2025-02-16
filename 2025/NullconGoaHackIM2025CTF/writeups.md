@@ -9,3 +9,13 @@
     - Hateful
     - Hateful 2
     - Paginator v2
+3. By `mh4ck3r0n3`
+- https://mh4ck3r0n3.github.io/categories/ethical-hacking/ctfs/jeopardy/nullcon-goa-hackim-ctf-2025/web/
+    - ZONEy
+    - Temptation
+    - Sess.io
+    - Paginator V2
+    - Paginator
+    - Numberizer
+    - Crahp
+    - Bfail
