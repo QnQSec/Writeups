@@ -136,3 +136,7 @@ ascii_numbers = bytes(notes).decode()
 notes = [int(c) for c in ascii_numbers.split()]
 print(bytes([a ^ b for a, b in zip(notes, velocities)]).decode())
 ```
+2. By `mH4ck3r0n3`
+- https://mh4ck3r0n3.github.io/categories/ethical-hacking/ctfs/jeopardy/bitsctf-2025/web/
+    - Baby Web
+    - BrokenCode
