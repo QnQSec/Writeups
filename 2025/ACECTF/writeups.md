@@ -135,12 +135,12 @@ After that, calculate `sha256sum` of all images:
 
 `sha256sum *`
 
-![checksum](../image/checksum.png)
+![checksum](./images/checksum.png)
 
 
 Looking closely, we can see that all files have same checksum except `87.jpg`. So this is probably our file. Extract the data from this file using steghide:
 
-![steghide](../image/1.png)
+![steghide](./images/1.png)
 
 We got a txt file that contains some whitespace language. The file seems to be blank but contains some hidden data. Exploring a little bit, I found this python code to convert whitespaces to a normal language:
 
