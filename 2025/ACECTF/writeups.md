@@ -135,7 +135,7 @@ After that, calculate `sha256sum` of all images:
 
 `sha256sum *`
 
-![checksum]('../image/checksum.png')
+![checksum](../image/checksum.png)
 
 
 Looking closely, we can see that all files have same checksum except `87.jpg`. So this is probably our file. Extract the data from this file using steghide:
