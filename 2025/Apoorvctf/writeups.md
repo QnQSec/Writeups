@@ -12,7 +12,7 @@ They're optimizing SEO to show this garbage?!
 
 > Author: proximuz
 
-![Web chall](https://seo-opal.vercel.app)
+[Web chall](https://seo-opal.vercel.app)
 
 At first glance we can not do anything on the page, we do not have any functionality or vulnerability.
 Automatically you think of doing reconnaissance, but you can't use automated tools, so you have to do a manual reconnaissance.
