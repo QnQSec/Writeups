@@ -5,7 +5,7 @@
     - ArchBTW
     - Blend in Disguise
 
-2. By 'Bytecodesky'
+2. By `Bytecodesky`
 
 # SEO CEO - WEB
 They're optimizing SEO to show this garbage?!
