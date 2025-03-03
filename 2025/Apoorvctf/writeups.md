@@ -62,7 +62,7 @@ In the digital realm, Blog-1 awaited brave developers. The mission? Craft a capt
 
 We have basic web page where we can register user and login with it. Exploring menu items, we have option of `Daily Rewards`
 
-[Claim](../images/claim.png)
+[Claim](./images/claim.png)
 
 
 We can see that we have to write 5 blogs to claim the reward (which is probably our flag). But when we try to write 2 blogs, it tells us that we can only write one blog per day. This suggests that there might be a race condition vulnerability, where we can send multiple concurrent requests.
@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
 And we successfully wrote 5 blogs. Visiting `Daily Reward` option sends request to `/api/v2/gift` endpoint which contains this:
 
-[claim2](../images/claim2.png)
+[claim2](./images/claim2.png)
 
 
 This links to a troll youtube video:
